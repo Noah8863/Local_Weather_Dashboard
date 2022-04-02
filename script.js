@@ -8,21 +8,19 @@ var cityBlock = document.getElementById('cityNameContainer')
 
 
 //var city = inputFromUser.value
-//var apiKeyForWeather = '&appid=05477151a72eb8675c1e912165d66a19'
-//var units = '&units=metric'
-//const url = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + units + apiKeyForWeather
+var apiKeyForWeather = '&appid=05477151a72eb8675c1e912165d66a19'
+var units = '&units=metric'
+var newURL = ''
 
-submitBtnElemenet.addEventListener('click', grabbingData)
-
-
-const url = 'https://api.openweathermap.org/data/2.5/forecast?lat=39.7392364&lon=-104.9848623&appid=05477151a72eb8675c1e912165d66a19'
+submitBtnElemenet.addEventListener('click', pickingCity)
 
 
-function grabbingData () {
-    title.innerHTML = "Search For A New City:"
-    citiesSearched.classList.remove('hide')
-
-    fetch (url) 
+function pickingCity (){
+    searchedCities()
+    var city = inputFromUser.value
+    const url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKeyForWeather
+    console.log(url)
+    fetch (url)
     .then(function (response) {
         if (!response.ok) {
             throw response.json();
@@ -32,77 +30,135 @@ function grabbingData () {
       })
   
     .then(function (response) {
-        console.log(response); //check results
         
-        //Creating variables for the different data we need
-        //Making variables for Day1
-        var tempFor1 = 'Tempature: ' + response.list[2].main.temp
-        var humidityFor1 = 'Humidity is: ' + response.list[2].main.humidity
-        var windSpeedFor1 = 'Wind: ' + response.list[2].wind.speed + ' MPH'
-        
-        //Making variables for Day2
-        var tempFor2 = 'Tempature: ' + response.list[10].main.temp
-        var humidityFor2 = 'Humidity is: ' + response.list[10].main.humidity
-        var windspeedFor2 = 'Wind: ' + response.list[10].wind.speed + ' MPH'
-        
-        //Making variables for Day3
-        var tempFor3 = 'Tempature: ' + response.list[18].main.temp
-        var humidityFor3 = 'Humidity is: ' + response.list[18].main.humidity
-        var windspeedFor3 = 'Wind: ' + response.list[18].wind.speed + ' MPH'
-        
-        //Making variables for Day4
-        var tempFor4 = 'Tempature: ' + response.list[26].main.temp
-        var humidityFor4 = 'Humidity is: ' + response.list[26].main.humidity
-        var windspeedFor4 = 'Wind: ' + response.list[26].wind.speed + ' MPH'
-        
-        //Making variables for Day5
-        var tempFor5 = 'Tempature: ' + response.list[34].main.temp
-        var humidityFor5 = 'Humidity is: ' + response.list[34].main.humidity
-        var windspeedFor5 = 'Wind: ' + response.list[34].wind.speed + ' MPH'
-        
+        var lat = response.city.coord.lat
+        var lon = response.city.coord.lon
 
-        // Putting all the values for first day
-        const temp1 = document.getElementById('temp1')
-        temp1.innerHTML = tempFor1
-        const hum1 = document.getElementById('hum1')
-        hum1.innerHTML = humidityFor1 
-        const wind1 = document.getElementById('wind1')
-        wind1.innerHTML = windSpeedFor1
+        lat = Math.round(lat)
+        lon = Math.round(lon)
 
-        // Putting all the values for the second day
-        const temp2 = document.getElementById('temp2')
-        temp2.innerHTML = tempFor2
-        const hum2 = document.getElementById('hum2')
-        hum2.innerHTML = humidityFor2
-        const wind2 = document.getElementById('wind2')
-        wind2.innerHTML = windspeedFor2
+        var newURL = 'https://api.openweathermap.org/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + lon + '&appid=05477151a72eb8675c1e912165d66a19'
+        
+        console.log(newURL)
+        console.log('first Fetch is working!')
 
-        //Putting all the values for the third day
-        const temp3 = document.getElementById('temp3')
-        temp3.innerHTML = tempFor3
-        const hum3 = document.getElementById('hum3')
-        hum3.innerHTML = humidityFor3
-        const wind3 = document.getElementById('wind3')
-        wind3.innerHTML = windspeedFor3
+        grabbingData()
 
-        //Putting all the values for the fourth day
-        const temp4 = document.getElementById('temp4')
-        temp4.innerHTML = tempFor4
-        const hum4 = document.getElementById('hum4')
-        hum4.innerHTML = humidityFor4
-        const wind4 = document.getElementById('wind4')
-        wind4.innerHTML = windspeedFor4
+        function grabbingData () {
+            title.innerHTML = "Search For A New City:"
+            citiesSearched.classList.remove('hide')
+            console.log('Second Fetch is called')
+        
+            fetch (newURL) 
+            .then(function (response) {
+                if (!response.ok) {
+                    throw response.json();
+            }
+          
+                return response.json();
+              })
+          
+            .then(function (response) {
+        
+                console.log(response); //check results
+                //Creating variables for the different data we need
+        
+                //Making variables for Day1
+                var tempFor1 = 'Tempature: ' + response.list[2].main.temp
+                var humidityFor1 = 'Humidity is: ' + response.list[2].main.humidity
+                var windSpeedFor1 = 'Wind: ' + response.list[2].wind.speed + ' MPH'
+                //chop up the beat
+                //I mean chop up the time
+                var time1 = response.list[2].dt_txt
+                newTime1 = time1.split(' ')[0]
 
-        //Putting all the values for the fifth day
-        const temp5 = document.getElementById('temp5')
-        temp5.innerHTML = tempFor5
-        const hum5 = document.getElementById('hum5')
-        hum5.innerHTML = humidityFor5
-        const wind5 = document.getElementById('wind5')
-        wind5.innerHTML = windspeedFor5
+                
+        
+                //Making variables for Day2
+                var tempFor2 = 'Tempature: ' + response.list[10].main.temp
+                var humidityFor2 = 'Humidity is: ' + response.list[10].main.humidity
+                var windspeedFor2 = 'Wind: ' + response.list[10].wind.speed + ' MPH'
+                var time2 = response.list[10].dt_txt
+                newTime2 = time2.split(' ')[0]
+                
+        
+                //Making variables for Day3
+                var tempFor3 = 'Tempature: ' + response.list[18].main.temp
+                var humidityFor3 = 'Humidity is: ' + response.list[18].main.humidity
+                var windspeedFor3 = 'Wind: ' + response.list[18].wind.speed + ' MPH'
+                var time3 = response.list[18].dt_txt
+                newTime3 = time3.split(' ')[0]
+
+        
+                //Making variables for Day4
+                var tempFor4 = 'Tempature: ' + response.list[26].main.temp
+                var humidityFor4 = 'Humidity is: ' + response.list[26].main.humidity
+                var windspeedFor4 = 'Wind: ' + response.list[26].wind.speed + ' MPH'
+                var time4 = response.list[26].dt_txt
+                newTime4 = time4.split(' ')[0]
+        
+                //Making variables for Day5
+                var tempFor5 = 'Tempature: ' + response.list[34].main.temp
+                var humidityFor5 = 'Humidity is: ' + response.list[34].main.humidity
+                var windspeedFor5 = 'Wind: ' + response.list[34].wind.speed + ' MPH'
+                var time5 = response.list[34].dt_txt
+                newTime5 = time5.split(' ')[0]
+        
+        
+                // Putting all the values for first day
+                const temp1 = document.getElementById('temp1')
+                temp1.innerHTML = tempFor1
+                const hum1 = document.getElementById('hum1')
+                hum1.innerHTML = humidityFor1 
+                const wind1 = document.getElementById('wind1')
+                wind1.innerHTML = windSpeedFor1
+                const date1 = document.getElementById('date1')
+                date1.innerHTML = newTime1
+        
+                // Putting all the values for the second day
+                const temp2 = document.getElementById('temp2')
+                temp2.innerHTML = tempFor2
+                const hum2 = document.getElementById('hum2')
+                hum2.innerHTML = humidityFor2
+                const wind2 = document.getElementById('wind2')
+                wind2.innerHTML = windspeedFor2
+                const date2 = document.getElementById('date2')
+                date2.innerHTML = newTime2
+        
+                //Putting all the values for the third day
+                const temp3 = document.getElementById('temp3')
+                temp3.innerHTML = tempFor3
+                const hum3 = document.getElementById('hum3')
+                hum3.innerHTML = humidityFor3
+                const wind3 = document.getElementById('wind3')
+                wind3.innerHTML = windspeedFor3
+                const date3 = document.getElementById('date3')
+                date3.innerHTML = newTime3
+        
+                //Putting all the values for the fourth day
+                const temp4 = document.getElementById('temp4')
+                temp4.innerHTML = tempFor4
+                const hum4 = document.getElementById('hum4')
+                hum4.innerHTML = humidityFor4
+                const wind4 = document.getElementById('wind4')
+                wind4.innerHTML = windspeedFor4
+                const date4 = document.getElementById('date4')
+                date4.innerHTML = newTime4
+        
+                //Putting all the values for the fifth day
+                const temp5 = document.getElementById('temp5')
+                temp5.innerHTML = tempFor5
+                const hum5 = document.getElementById('hum5')
+                hum5.innerHTML = humidityFor5
+                const wind5 = document.getElementById('wind5')
+                wind5.innerHTML = windspeedFor5
+                const date5 = document.getElementById('date5')
+                date5.innerHTML = newTime5
+                
+            })
+        }
     })
 }
-
 
 //Displaying the cities that were searched for
 function searchedCities () {
