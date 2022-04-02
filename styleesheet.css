@@ -1,0 +1,94 @@
+ body {
+     font-size: larger;
+     margin:20px;
+ }
+ header {
+     width: auto;
+     height: 100px;
+     color:rgb(255, 255, 255);
+    background-image: linear-gradient(to right, rgb(115, 190, 219) , rgb(50, 140, 214));
+    margin: 5px;
+    padding: 20px 0;
+    text-align: center;
+    font-size: xx-large;
+ }
+ .hide {
+     display: none;
+ }
+ #cityLocater {
+     width:300px;
+     height:40px;
+     margin:15px;
+ }
+ #submitBtn {
+     width:300px;
+     color:white;
+     background-color: rgb(115, 190, 219);
+     border-bottom-left-radius: 50px;
+     border-top-left-radius: 50px;
+     border-bottom-right-radius: 50px;
+     border-top-right-radius: 50px;
+     transition: all 0.5s;
+ }
+ #submitBtn:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+ }
+ #searchBlock {
+     width: 400px;
+     height:500px;
+     background-color: white;
+     text-align: center;
+     margin:1px;
+ }
+ #mainTitle {
+    font-size: xx-large;
+ }
+ #citiesSearched {
+     margin:15px;
+ }
+ .searchedData {
+     color: white;
+     background-color:rgb(115, 190, 219);
+     margin: 10px;
+     width: 300px;
+     height: 50px;
+     border-bottom-left-radius: 50px;
+     border-top-left-radius: 50px;
+     border-bottom-right-radius: 50px;
+     border-top-right-radius: 50px;
+     transition: all 0.5s;
+ }
+ .searchedData:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+ }
+#cityNameContainer {
+    position: relative;
+    left: 40px;
+    width: 800px;
+    height: 80px;
+    margin:20px;
+    margin-inline: 50px;
+    font-size: xx-large;
+    text-align: center;
+    color:rgb(255, 255, 255);
+    background-image: linear-gradient(to right, rgb(115, 190, 219) , rgb(50, 140, 214));
+    
+}
+#dataDetailContainer {
+    position: absolute;
+    top: 140px;
+    left: 390px;
+    width: 1000px;
+    height: 530px;
+}
+.col {
+    background-color: lightgrey;
+    margin: 5px;
+    width:30px;
+    height: 300px;
+    text-align: center;
+}
