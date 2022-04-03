@@ -220,5 +220,5 @@ function searchedCities () {
     para.appendChild(node)
     mainBlock.appendChild(para)
 
-}  
+}
 
