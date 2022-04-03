@@ -17,9 +17,11 @@ submitBtnElemenet.addEventListener('click', pickingCity)
 
 function pickingCity (){
     searchedCities()
+    
     var city = inputFromUser.value
     const url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKeyForWeather
     console.log(url)
+
     fetch (url)
     .then(function (response) {
         if (!response.ok) {
@@ -45,6 +47,7 @@ function pickingCity (){
         grabbingData()
 
         function grabbingData () {
+        
             title.innerHTML = "Search For A New City:"
             citiesSearched.classList.remove('hide')
             console.log('Second Fetch is called')
@@ -65,42 +68,41 @@ function pickingCity (){
         
                 //Making variables for Day1
                 var tempFor1 = 'Tempature: ' + response.list[2].main.temp
-                var humidityFor1 = 'Humidity is: ' + response.list[2].main.humidity
-                var windSpeedFor1 = 'Wind: ' + response.list[2].wind.speed + ' MPH'
-                //chop up the beat
+                var humidityFor1 = 'Humidity is: ' + response.list[2].main.humidity + '%'
+                var windSpeedFor1 = 'Wind is: ' + response.list[2].wind.speed + ' MPH'
+                //choppin up the beat
                 //I mean chop up the time
                 var time1 = response.list[2].dt_txt
                 newTime1 = time1.split(' ')[0]
-
                 
         
                 //Making variables for Day2
                 var tempFor2 = 'Tempature: ' + response.list[10].main.temp
-                var humidityFor2 = 'Humidity is: ' + response.list[10].main.humidity
-                var windspeedFor2 = 'Wind: ' + response.list[10].wind.speed + ' MPH'
+                var humidityFor2 = 'Humidity is: ' + response.list[10].main.humidity + '%'
+                var windspeedFor2 = 'Wind is: ' + response.list[10].wind.speed + ' MPH'
                 var time2 = response.list[10].dt_txt
                 newTime2 = time2.split(' ')[0]
                 
         
                 //Making variables for Day3
                 var tempFor3 = 'Tempature: ' + response.list[18].main.temp
-                var humidityFor3 = 'Humidity is: ' + response.list[18].main.humidity
-                var windspeedFor3 = 'Wind: ' + response.list[18].wind.speed + ' MPH'
+                var humidityFor3 = 'Humidity is: ' + response.list[18].main.humidity + '%'
+                var windspeedFor3 = 'Wind is: ' + response.list[18].wind.speed + ' MPH'
                 var time3 = response.list[18].dt_txt
                 newTime3 = time3.split(' ')[0]
 
         
                 //Making variables for Day4
                 var tempFor4 = 'Tempature: ' + response.list[26].main.temp
-                var humidityFor4 = 'Humidity is: ' + response.list[26].main.humidity
-                var windspeedFor4 = 'Wind: ' + response.list[26].wind.speed + ' MPH'
+                var humidityFor4 = 'Humidity is: ' + response.list[26].main.humidity + '%'
+                var windspeedFor4 = 'Wind is: ' + response.list[26].wind.speed + ' MPH'
                 var time4 = response.list[26].dt_txt
                 newTime4 = time4.split(' ')[0]
         
                 //Making variables for Day5
                 var tempFor5 = 'Tempature: ' + response.list[34].main.temp
-                var humidityFor5 = 'Humidity is: ' + response.list[34].main.humidity
-                var windspeedFor5 = 'Wind: ' + response.list[34].wind.speed + ' MPH'
+                var humidityFor5 = 'Humidity is: ' + response.list[34].main.humidity + '%'
+                var windspeedFor5 = 'Wind is: ' + response.list[34].wind.speed + ' MPH'
                 var time5 = response.list[34].dt_txt
                 newTime5 = time5.split(' ')[0]
         
@@ -114,7 +116,8 @@ function pickingCity (){
                 wind1.innerHTML = windSpeedFor1
                 const date1 = document.getElementById('date1')
                 date1.innerHTML = newTime1
-        
+
+
                 // Putting all the values for the second day
                 const temp2 = document.getElementById('temp2')
                 temp2.innerHTML = tempFor2
@@ -155,6 +158,48 @@ function pickingCity (){
                 const date5 = document.getElementById('date5')
                 date5.innerHTML = newTime5
                 
+                
+                var cityContainer = document.getElementById('cityNameContainer')
+                var dateContainer = document.getElementById('dateContainers')
+                var talkTrack = document.getElementById('talkTrack')
+                var cityName = document.getElementById('mainTextContainer')
+
+
+                var cityWindSpeed = document.getElementById('windSpeed')
+                var uvIndex = document.getElementById('UVIndex')
+                var tempForDay = document.getElementById('tempForDay')
+                var humidityForDay = document.getElementById('humidity')
+
+
+                var h1Tag = document.createElement('h1')
+                var node = document.createTextNode('City of: ' + city)
+                h1Tag.appendChild(node)
+                cityName.appendChild(h1Tag)
+
+                var para1 = document.createElement('h4')
+                var node1 = document.createTextNode('Currently in ' + city + ' the wind speed is  ' + response.list[2].wind.speed + ' MPH')
+                para1.appendChild(node1)
+                cityName.appendChild(para1)
+
+                var para2 = document.createElement('h4')
+                var node2 = document.createTextNode(' The tempature is ' + response.list[2].main.temp)
+                para2.appendChild(node2)
+                cityName.appendChild(para2)
+
+                var para3 = document.createElement('h4')
+                var node3 = document.createTextNode('The Humidity is ' + response.list[2].main.humidity + '%')
+                para3.appendChild(node3)
+                cityName.appendChild(para3)
+
+                talkTrack.innerHTML = newTime1
+                cityContainer.classList.remove('hide')
+                dateContainer.classList.remove('hide')
+                cityWindSpeed.classList.remove('hide')
+                uvIndex.classList.remove('hide')
+                tempForDay.classList.remove('hide')
+                humidityForDay.classList.remove('hide')
+                
+                
             })
         }
     })
@@ -176,3 +221,4 @@ function searchedCities () {
     mainBlock.appendChild(para)
 
 }  
+

@@ -21,21 +21,35 @@
         
     </container>
     <div id="dataDetailContainer">
-      <div id="cityNameContainer">
-        <p id="cityName">Weather Dashboard</p>
+      <div class='hide' id="cityNameContainer">
+        <p id="cityName">Forcast For Today</p>
       </div>
-      <div class="container">
+      <div id="mainTextContainer">
+        <h3 id="talkTrack">Welcome to the daily Weather Forcast Dashboard. Start by searching for a city and you'll get things like: 
+          <p id="windSpeed" class="hide">Wind Speed</p>
+          <p id="UVIndex" class="hide">UV Index</p>
+          <p id="tempForDay" class="hide">Tempature</p>
+          <p id="humidity" class="hide">Humidity</p>
+          <ul id="lists">
+            <li>Tempature</li>
+            <li>Humidity</li>
+            <li>Wind Speeds</li>
+            <li>And the UV Index for the current day</li>
+          </ul>
+        </h3>
+      </div>
+      <div class="container hide" id="dateContainers">
         <div class="row align-items-start">
           <div class="col" id="day1">
             <h3 id="date1">Date Here</h3>
-            <img id="img1">
+            <img id="newImg1">
             <p id="temp1"></p>
             <p id="hum1"></p>
             <p id="wind1"></p>
           </div>
           <div class="col" id="day2">
             <h3 id="date2">Date Here</h3>
-            <img id="img2">
+            <img id="newImg2">
             <p id="temp2"></p>
             <p id="hum2"></p>
             <p id="wind2"></p>
